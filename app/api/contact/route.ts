@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     const resend = getResend()
 
     // Send email notification
-    const { error } = await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: "Contact Form <onboarding@resend.dev>",
       to: process.env.CONTACT_EMAIL || "your-email@example.com",
       replyTo: email,
@@ -39,18 +39,20 @@ export async function POST(request: Request) {
     })
 
     if (error) {
+      const message = error?.message || JSON.stringify(error) || "Failed to send email"
       console.error("Resend error:", error)
       return NextResponse.json(
-        { error: "Failed to send email" },
+        { error: message },
         { status: 500 }
       )
     }
 
     return NextResponse.json({ success: true })
-  } catch (error) {
-    console.error("Contact form error:", error)
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Internal server error"
+    console.error("Contact form error:", err)
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: message },
       { status: 500 }
     )
   }
