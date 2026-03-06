@@ -34,11 +34,8 @@ export function Contact() {
         body: JSON.stringify(formData),
       })
 
-      const data = await response.json().catch(() => ({}))
-
       if (!response.ok) {
-        setError(data.error || t.contact.form.error)
-        return
+        throw new Error("Failed to send message")
       }
 
       setIsSuccess(true)
