@@ -13,14 +13,14 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <Header />
-      {sections.showHero && <Hero />}
+      <Header sections={sections} />
+      {sections.showHero && <Hero sections={sections} />}
       {sections.showServices && <Services />}
       {sections.showAbout && <About />}
       {sections.showProjects && <Projects />}
       {sections.showTestimonials && <Testimonials />}
       {sections.showContact && <Contact />}
-      <Footer />
+      <Footer sections={sections} />
     </main>
   )
 }

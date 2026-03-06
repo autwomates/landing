@@ -31,7 +31,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="sm:col-span-2 lg:col-span-1">
-            <span className="text-xl font-bold">Au<span className="text-primary"><i>two</i></span>mates</span>
+            <span className="text-xl font-bold tracking-tight">Au<span className="text-primary font-semibold italic ml-[-0.06em] mr-[0.04em]">two</span>mates</span>
             <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
               Building innovative software solutions that transform businesses and drive growth.
             </p>

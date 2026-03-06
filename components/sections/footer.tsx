@@ -2,6 +2,7 @@
 
 import { Github, Linkedin, Twitter } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import type { SiteConfig } from "@/config/site.config"
 
 const socialLinks = [
   { icon: Twitter, href: "", label: "Twitter" },
@@ -9,7 +10,11 @@ const socialLinks = [
   { icon: Github, href: "", label: "GitHub" },
 ]
 
-export function Footer() {
+type FooterProps = {
+  sections: SiteConfig["sections"]
+}
+
+export function Footer({ sections }: FooterProps) {
   const { t } = useLanguage()
 
   const footerLinks = {
@@ -21,22 +26,18 @@ export function Footer() {
     ],
     company: [
       { label: t.footer.aboutUs, href: "#about" },
-      { label: t.nav.projects, href: "#projects" },
-      { label: t.nav.testimonials, href: "#testimonials" },
+      ...(sections.showProjects ? [{ label: t.nav.projects, href: "#projects" }] : []),
+      ...(sections.showTestimonials ? [{ label: t.nav.testimonials, href: "#testimonials" }] : []),
       { label: t.nav.contact, href: "#contact" },
-    ],
-    legal: [
-      { label: t.footer.privacyPolicy, href: "#" },
-      { label: t.footer.termsOfService, href: "#" },
     ],
   }
 
   return (
     <footer className="bg-card border-t border-border">
       <div className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           <div className="sm:col-span-2 lg:col-span-1">
-            <span className="text-xl font-bold">Au<span className="text-primary"><i>two</i></span>mates</span>
+            <span className="text-xl font-bold tracking-tight">Au<span className="text-primary font-semibold italic ml-[-0.06em] mr-[0.04em]">two</span>mates</span>
             <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
               {t.footer.tagline}
             </p>
@@ -74,22 +75,6 @@ export function Footer() {
             <h3 className="font-semibold mb-4">{t.footer.company}</h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-4">{t.footer.legal}</h3>
-            <ul className="space-y-3">
-              {footerLinks.legal.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}

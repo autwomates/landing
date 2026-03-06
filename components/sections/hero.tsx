@@ -3,8 +3,13 @@
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/lib/language-context"
+import type { SiteConfig } from "@/config/site.config"
 
-export function Hero() {
+type HeroProps = {
+  sections: SiteConfig["sections"]
+}
+
+export function Hero({ sections }: HeroProps) {
   const { t } = useLanguage()
 
   const stats = [
@@ -17,8 +22,10 @@ export function Hero() {
   return (
     <section className="min-h-screen flex items-center justify-center pt-16 px-4">
       <div className="max-w-7xl mx-auto text-center">
-        <div className="inline-block px-4 py-1.5 mb-6 text-sm font-medium bg-secondary rounded-full text-muted-foreground">
-          {t.hero.badge}
+        <div className="inline-block px-4 py-1.5 mb-6 text-sm font-medium bg-secondary rounded-full text-muted-foreground tracking-tight">
+          {t.hero.badgeBefore}
+          <span className="text-primary font-semibold italic ml-[-0.06em] mr-[0.04em]">{t.hero.badgeHighlight}</span>
+          {t.hero.badgeAfter}
         </div>
         
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-balance max-w-4xl mx-auto">
@@ -37,9 +44,11 @@ export function Hero() {
               <ArrowRight className="ml-2 h-4 w-4" />
             </a>
           </Button>
-          <Button size="lg" variant="outline" asChild>
-            <a href="#projects">{t.hero.viewWork}</a>
-          </Button>
+          {sections.showProjects && (
+            <Button size="lg" variant="outline" asChild>
+              <a href="#projects">{t.hero.viewWork}</a>
+            </Button>
+          )}
         </div>
         
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">

@@ -8,14 +8,14 @@ const founders = [
   {
     name: "Alejandro J. Zbrun",
     position: "Co-founder",
-    image: "/placeholder-avatar-1.jpg",
+    image: "/alejandro.png",
     bio: "",
     linkedin: "https://www.linkedin.com/in/alejandro-zbrun/",
   },
   {
     name: "Lisandro Pascuali",
     position: "Co-founder",
-    image: "/placeholder-avatar-2.jpg",
+    image: "/lisandro.png",
     bio: "",
     linkedin: "https://www.linkedin.com/in/lisandro-pascuali/",
   },
@@ -46,10 +46,12 @@ export function About() {
             <Card key={founder.name} className="bg-card border-border overflow-hidden">
               <CardContent className="p-8">
                 <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-                  <div className="w-32 h-32 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center flex-shrink-0 overflow-hidden">
-                    <span className="text-4xl text-primary">
-                      {founder.name.charAt(1)}
-                    </span>
+                  <div className="w-32 h-32 rounded-full border-2 border-primary/30 flex-shrink-0 overflow-hidden bg-muted">
+                    <img
+                      src={founder.image}
+                      alt={founder.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div className="text-center sm:text-left">
                     <h3 className="text-xl font-semibold">{founder.name}</h3>

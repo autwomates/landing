@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { Menu, X, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -11,30 +11,42 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useLanguage } from "@/lib/language-context"
 import { Language } from "@/lib/translations"
+import type { SiteConfig } from "@/config/site.config"
 
 const languages: { code: Language; label: string; flag: string }[] = [
   { code: "en", label: "English", flag: "EN" },
   { code: "es", label: "Español", flag: "ES" },
 ]
 
-export function Header() {
+type HeaderProps = {
+  sections: SiteConfig["sections"]
+}
+
+export function Header({ sections }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { language, setLanguage, t } = useLanguage()
 
-  const navItems = [
-    { label: t.nav.services, href: "#services" },
-    { label: t.nav.us, href: "#about" },
-    { label: t.nav.projects, href: "#projects" },
-    { label: t.nav.testimonials, href: "#testimonials" },
-    { label: t.nav.contact, href: "#contact" },
-  ]
+  const navItems = useMemo(
+    () => [
+      { label: t.nav.services, href: "#services" },
+      { label: t.nav.us, href: "#about" },
+      ...(sections.showProjects ? [{ label: t.nav.projects, href: "#projects" }] : []),
+      ...(sections.showTestimonials ? [{ label: t.nav.testimonials, href: "#testimonials" }] : []),
+      { label: t.nav.contact, href: "#contact" },
+    ],
+    [t, sections.showProjects, sections.showTestimonials]
+  )
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <a href="#" className="text-xl font-bold tracking-tight">
-            Au<span className="text-primary"><i>two</i></span>mates
+          <a href="#" className="flex items-center">
+            <img
+              src="/autwomates.png"
+              alt="Autwomates"
+              className="h-10 w-auto"
+            />
           </a>
 
           <nav className="hidden md:flex items-center gap-8">

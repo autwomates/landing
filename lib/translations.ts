@@ -11,7 +11,9 @@ export const translations = {
     },
     // Hero
     hero: {
-      badge: "Au<i>two</i>mating your business technology.",
+      badgeBefore: "Au",
+      badgeHighlight: "two",
+      badgeAfter: "mating your business technology.",
       title: "We Build Software That",
       titleHighlight: " Drives Growth",
       description: "From concept to deployment, we craft custom software solutions that help businesses scale, innovate, and stay ahead of the competition.",
@@ -146,9 +148,11 @@ export const translations = {
     },
     // Hero
     hero: {
-      badge: "Au<i>two</i>matizando tu negocio",
-      title: "Software Que",
-      titleHighlight: " Impulsa el Crecimiento",
+      badgeBefore: "Au",
+      badgeHighlight: "two",
+      badgeAfter: "matizando tu negocio.",
+      title: "Software que",
+      titleHighlight: " impulsa el crecimiento",
       description: "Desde el concepto hasta el despliegue, creamos soluciones de software personalizadas que ayudan a las empresas a escalar, innovar y mantenerse a la vanguardia.",
       startProject: "Inicia Tu Proyecto",
       viewWork: "Ver Nuestro Trabajo",
